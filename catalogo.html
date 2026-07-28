@@ -14,6 +14,22 @@
             color: #2e7d32;
             text-align: center;
         }
+        .filtros {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .filtros button {
+            margin: 5px;
+            padding: 8px 16px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .filtros button:hover {
+            background: #1b5e20;
+        }
         .producto {
             border: 1px solid #ccc;
             border-radius: 8px;
@@ -43,6 +59,14 @@
     <h1>🌱 Catálogo AgroMarket</h1>
     <p style="text-align: center;">Productos frescos del campo a tu mesa</p>
 
+    <div class="filtros">
+        <button onclick="filtrar('todos')">Todos</button>
+        <button onclick="filtrar('Frutas')">Frutas</button>
+        <button onclick="filtrar('Hortalizas')">Hortalizas</button>
+        <button onclick="filtrar('Granos')">Granos</button>
+        <button onclick="filtrar('Tubérculos')">Tubérculos</button>
+    </div>
+
     <div id="lista-productos"></div>
 
     <script>
@@ -51,20 +75,36 @@
             { nombre: "Tomate riñón", precio: "$1.80/kg", categoria: "Hortalizas" },
             { nombre: "Zanahoria", precio: "$1.20/kg", categoria: "Hortalizas" },
             { nombre: "Quinoa", precio: "$4.00/kg", categoria: "Granos" },
-            { nombre: "Aguacate Hass", precio: "$3.50/unidad", categoria: "Frutas" }
+            { nombre: "Aguacate Hass", precio: "$3.50/unidad", categoria: "Frutas" },
+            { nombre: "Papa chola", precio: "$2.00/kg", categoria: "Tubérculos" }
         ];
 
         const contenedor = document.getElementById('lista-productos');
-        productos.forEach(p => {
-            const div = document.createElement('div');
-            div.className = 'producto';
-            div.innerHTML = `
-                <span class="nombre">${p.nombre}</span>
-                <span class="categoria">${p.categoria}</span>
-                <span class="precio">${p.precio}</span>
-            `;
-            contenedor.appendChild(div);
-        });
+
+        function mostrarProductos(lista) {
+            contenedor.innerHTML = '';
+            lista.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'producto';
+                div.innerHTML = `
+                    <span class="nombre">${p.nombre}</span>
+                    <span class="categoria">${p.categoria}</span>
+                    <span class="precio">${p.precio}</span>
+                `;
+                contenedor.appendChild(div);
+            });
+        }
+
+        function filtrar(categoria) {
+            if (categoria === 'todos') {
+                mostrarProductos(productos);
+            } else {
+                const filtrados = productos.filter(p => p.categoria === categoria);
+                mostrarProductos(filtrados);
+            }
+        }
+
+        mostrarProductos(productos);
     </script>
 </body>
 </html>
