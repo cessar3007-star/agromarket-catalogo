@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo AgroMarket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+        }
+        h1 {
+            color: #2e7d32;
+            text-align: center;
+        }
+        .producto {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .producto .nombre {
+            font-weight: bold;
+        }
+        .producto .precio {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        .categoria {
+            background-color: #e8f5e9;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌱 Catálogo AgroMarket</h1>
+    <p style="text-align: center;">Productos frescos del campo a tu mesa</p>
+
+    <div id="lista-productos"></div>
+
+    <script>
+        const productos = [
+            { nombre: "Banano orgánico", precio: "$2.50/kg", categoria: "Frutas" },
+            { nombre: "Tomate riñón", precio: "$1.80/kg", categoria: "Hortalizas" },
+            { nombre: "Zanahoria", precio: "$1.20/kg", categoria: "Hortalizas" },
+            { nombre: "Quinoa", precio: "$4.00/kg", categoria: "Granos" },
+            { nombre: "Aguacate Hass", precio: "$3.50/unidad", categoria: "Frutas" }
+        ];
+
+        const contenedor = document.getElementById('lista-productos');
+        productos.forEach(p => {
+            const div = document.createElement('div');
+            div.className = 'producto';
+            div.innerHTML = `
+                <span class="nombre">${p.nombre}</span>
+                <span class="categoria">${p.categoria}</span>
+                <span class="precio">${p.precio}</span>
+            `;
+            contenedor.appendChild(div);
+        });
+    </script>
+</body>
+</html>
